@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>RedditClone</title>
+		<title>Baddit</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<%= csrf_meta_tags %>
 		<%= csp_meta_tag %>
@@ -11,8 +11,9 @@
 		<%= javascript_importmap_tags %>
 	</head>
 
-	<body>
-		<main class="container mx-auto mt-28 px-5 flex">
+	<body class="bg-[#dae0e6]">
+		<%= render 'layouts/navbar' %>
+		<main class="px-8 mt-16">
 			<% if notice %>
 				<p class="alert alert-success"><%= notice %></p>
 			<% end %>
