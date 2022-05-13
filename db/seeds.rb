@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-(1..10).each do |i|
-  Post.create!(title: "Title #{i}", body: "Body #{i}", votes: rand(-10..10))
+('a'..'e').each do |i|
+  Community.create(name: "Community #{i}")
+end
+
+Community.all.each do |community|
+  (1..3).each do |i|
+    community.posts.create(title: "#{community.name} 's post #{i}", body: "Body #{i}", votes: rand(-10..10))
+  end
 end

@@ -11,10 +11,12 @@
 
 	<div class="flex flex-col gap-1">
 		<h2 class="font-semibold">
-			<%= link_to post.title, post %>
+			<%= link_to post.title, community_post_url(post.community.slug, post.slug) %>
 		</h2>
 		<div class="text-xs">
-			<span class="text-xs font-bold">r/subreddit</span>
+			<% unless current_page?(community_path(post.community.slug)) %>
+				<%= link_to "b/#{post.community.slug}", community_path(post.community.slug), class: "font-bold" %>
+			<% end %>
 			<span class="text-gray-400">Posted by u/user1 <%= time_ago_in_words(post.created_at) %> ago</span>
 		</div>
 		<a href="#" class="text-sm">0 Comments</a>

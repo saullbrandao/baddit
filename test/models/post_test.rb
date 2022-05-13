@@ -39,5 +39,20 @@ class PostTest < ActiveSupport::TestCase
     
     @post.body = "a" * 501
     assert_not @post.valid?
-  end  
+  end
+
+  test "should have a community" do
+    @post.community_id = nil
+    assert_not @post.valid?
+  end
+  
+  test "slug should be unique" do
+    @post.slug = posts(:three).slug
+    assert_not @post.valid?
+  end
+
+  test "should create a slug" do
+    post = Post.create!(title: "Test Title", body: "Test Body", community_id: communities(:one).id)
+    assert post.slug == "test_title"
+  end
 end

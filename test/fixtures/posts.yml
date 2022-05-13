@@ -4,8 +4,19 @@ one:
   title: Post 1
   body: lorem ipsum dolor sit amet
   votes: 1
+  community: one
+  slug: post_1
 
 two:
   title: Post 2
   body: lorem ipsum dolor sit amet 2
   votes: 5
+  community: two
+  slug: post_2
+
+three:
+  title: Post 3
+  body: lorem ipsum dolor sit amet 3
+  votes: 5
+  community: one
+  slug: post_3
