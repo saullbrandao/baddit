@@ -1,0 +1,27 @@
+<div class="flex justify-center">
+	<%= form_with model: @post, 
+                class: "flex flex-col justify-center gap-2 bg-white p-8 rounded-md w-full md:w-2/3 xl:w-1/3" do |f| %>
+		<% if @post.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@post.errors.count, "error") %> prohibited this @post from being saved:</h2>
+
+				<ul>
+					<% @post.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<%= f.label :title %>
+		<%= f.text_field :title, label: :title, minlength: 3, maxlength: 50, required: true, class: "w-full"  %>
+
+		<%= f.label :body %>
+		<%= f.text_area :body, rows: 10, minlength: 3, maxlength: 500, required: true, class: "w-full"  %>
+
+		<%= f.label :community %>
+		<%= f.select :community, Community.pluck(:name)  %>
+
+		<%= f.button class: "bg-blue-500 text-white py-2 mt-2"  %>
+	<% end %>
+</div>
