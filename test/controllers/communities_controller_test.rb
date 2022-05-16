@@ -10,4 +10,10 @@ class CommunitiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", @community.name
   end
+
+  test "should get new" do
+    get new_community_path
+    assert_response :success
+    assert_select "h1", "New Community"
+  end
 end

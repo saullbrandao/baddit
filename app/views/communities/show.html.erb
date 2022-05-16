@@ -1,6 +1,11 @@
 <%= render 'header' %>
-<ul class="flex flex-col divide-y-2 divide-[#dae0e6] mb-2">
-	<% @community.posts.each do |post| %>
-		<%= render 'posts/post', post: post %>
-	<% end %>
-</ul>
+
+<% if @community.posts.any? %>
+	<ul class="flex flex-col divide-y-2 divide-[#dae0e6] mb-2">
+		<% @community.posts.each do |post| %>
+			<%= render 'posts/post', post: post %>
+		<% end %>
+	</ul>
+<% else %>
+	<p>No posts yet.</p>
+<% end %>

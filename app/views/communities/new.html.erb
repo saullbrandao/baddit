@@ -1,0 +1,9 @@
+<div class="flex justify-center">
+	<%= form_with model: @community, class: "flex flex-col justify-center gap-2 bg-white px-8 py-6 rounded-md w-full md:w-2/3 xl:w-1/3" do |f| %>
+		<h1 class="font-bold self-center text-lg" >New Community</h1>
+		<%= render 'shared/error_messages', object: @community %>
+		<%= f.label :name %>
+		<%= f.text_field :name, required: true, minlength: 3, maxlength: 20 , class: "w-full" %>
+		<%= f.button class: "bg-blue-500 text-white py-2 mt-2"  %>
+	<% end %>
+</div>

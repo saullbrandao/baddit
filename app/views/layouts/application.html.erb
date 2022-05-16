@@ -14,12 +14,8 @@
 	<body class="bg-[#dae0e6]">
 		<%= render 'layouts/navbar' %>
 		<main class="px-8 mt-16">
-			<% if notice %>
-				<p class="alert alert-success"><%= notice %></p>
-			<% end %>
-			<% if alert %>
-				<p class="alert alert-danger"><%= alert %></p>
-			<% end %>
+			<%= render 'shared/flash' %>
+
 			<%= yield %>
 		</main>
 	</body>
