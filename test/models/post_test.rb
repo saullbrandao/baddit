@@ -55,4 +55,12 @@ class PostTest < ActiveSupport::TestCase
     post = Post.create!(title: "Test Title", body: "Test Body", community_id: communities(:one).id)
     assert post.slug == "test_title"
   end
+
+  test "should calculate total_votes" do
+    assert @post.total_votes == @post.upvotes + @post.downvotes
+  end
+
+  test "should calculate votes_difference" do
+    assert @post.votes_difference == @post.upvotes - @post.downvotes
+  end
 end

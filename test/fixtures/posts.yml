@@ -3,20 +3,26 @@
 one:
   title: Post 1
   body: lorem ipsum dolor sit amet
-  votes: 1
+  upvotes: 2
+  downvotes: 1
+  total_votes: 3
   community: one
   slug: post_1
 
 two:
   title: Post 2
   body: lorem ipsum dolor sit amet 2
-  votes: 5
+  upvotes: 1
+  downvotes: 3
+  total_votes: 4
   community: two
   slug: post_2
 
 three:
   title: Post 3
   body: lorem ipsum dolor sit amet 3
-  votes: 5
+  upvotes: 2
+  downvotes: 1
+  total_votes: 3
   community: one
   slug: post_3
