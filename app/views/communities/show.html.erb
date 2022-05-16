@@ -1,9 +1,4 @@
-<header class="flex items-center mb-2 gap-2">
-	<h1 class="text-lg font-semibold">
-		<%= @community.name %>
-	</h1>
-	<button class="bg-blue-500 px-9 text-sm py-2 rounded-full text-white hover:brightness-110 transition">Join</button>
-</header>
+<%= render 'header' %>
 <ul class="flex flex-col divide-y-2 divide-[#dae0e6] mb-2">
 	<% @community.posts.each do |post| %>
 		<%= render 'posts/post', post: post %>
