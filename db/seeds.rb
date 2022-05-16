@@ -1,17 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+require 'faker'
 
-('a'..'e').each do |i|
-  Community.create(name: "Community #{i}")
+['rails', 'ruby', 'webdev', 'fullstack', 'programming'].each do |name|
+  Community.create(name: name)
 end
 
 Community.all.each do |community|
   (1..3).each do |i|
-    community.posts.create(title: "#{community.name} 's post #{i}", body: "Body #{i}", votes: rand(-10..10))
+    community.posts.create(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph_by_chars(number: 500), upvotes: rand(0..50), downvotes: rand(0..50))
   end
 end
