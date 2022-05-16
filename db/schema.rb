@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_125001) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_16_121131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,11 +25,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_125001) do
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
-    t.integer "votes", default: 0
+    t.integer "total_votes", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "community_id"
     t.string "slug"
+    t.integer "upvotes", default: 0
+    t.integer "downvotes", default: 0
     t.index ["community_id"], name: "index_posts_on_community_id"
   end
 
