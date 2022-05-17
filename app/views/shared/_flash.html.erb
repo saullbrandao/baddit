@@ -1,3 +1,4 @@
+<%# TODO: style flash messages %>
 <% flash.each do |message_type, message| %>
-	<%= content_tag(:div, message, class: "text-center") %>
+	<%= content_tag(:div, message, class: "text-center z-10 absolute left-0 right-0 -top-8") %>
 <% end %>

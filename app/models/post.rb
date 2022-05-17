@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
   include ActionView::Helpers::TextHelper
-  belongs_to :community
-
   before_create :add_slug, :add_total_votes
+
+  has_many :comments, dependent: :destroy
+  belongs_to :community
 
   validates :title, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :community_id }
   validates :body, presence: true, length: { minimum: 3, maximum: 500 }

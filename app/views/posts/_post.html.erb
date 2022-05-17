@@ -20,6 +20,6 @@
 			<% end %>
 			<span class="text-gray-400">Posted by u/user1 <%= time_ago_in_words(post.created_at) %> ago</span>
 		</div>
-		<a href="#" class="text-sm">0 Comments</a>
+		<%= link_to pluralize(post.comments.size, "comment"), community_post_url(post.community.slug, post.slug), class: "text-sm" %>
 	</div>
 </li>

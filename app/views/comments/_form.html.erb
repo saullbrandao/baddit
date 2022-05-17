@@ -1,0 +1,5 @@
+<%= form_with model: @comment, url: community_post_comments_path(post_slug: @post.slug) do |f| %>
+	<%= f.label :body, class: "hidden" %>
+	<%= f.text_area :body, minlength: 3, maxlength: 500, required: true, rows: 4, class: "w-full" %>
+	<%= f.button "Post Comment", class: "bg-blue-500 px-9 text-sm py-2 rounded-full text-white hover:brightness-110 transition" %>
+<% end %>

@@ -1,0 +1,7 @@
+<%# TODO: display upvotes and downvotes %>
+<li class="w-full flex flex-col justify-center gap-2 bg-white p-4 rounded-md">
+	<span class="text-gray-400 text-sm">Posted by u/user1 <%= time_ago_in_words(comment.created_at) %> ago</span>
+	<p class="break-all">
+		<%= comment.body %>
+	</p>
+</li>
