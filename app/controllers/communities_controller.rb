@@ -18,6 +18,14 @@ class CommunitiesController < ApplicationController
     end
   end
 
+  def destroy
+    @community = Community.find_by(slug: params[:slug])
+    @community.destroy
+
+    flash[:success] = "Community deleted!"
+    redirect_to :root
+  end
+
   private
 
   def community_params

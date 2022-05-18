@@ -16,4 +16,10 @@ class CommunitiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", "New Community"
   end
+
+  test "should destroy community" do
+    assert_difference "Community.count", -1 do
+      delete community_path(@community.slug)
+    end
+  end
 end

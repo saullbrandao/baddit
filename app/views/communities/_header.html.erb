@@ -2,5 +2,6 @@
 	<h1 class="text-lg font-semibold">
 		<%= link_to @community.name, community_path(@community.slug) %>
 	</h1>
-	<button class="bg-blue-500 px-9 text-sm py-2 rounded-full text-white hover:brightness-110 transition">Join</button>
+	<button class="bg-blue-500 w-24 text-sm py-2 rounded-full text-white hover:brightness-110 transition">Join</button>
+	<%= button_to "Delete", community_path(@community.slug), method: :delete, class: "bg-red-500 w-24 text-sm py-2 rounded-full text-white hover:brightness-110 transition" %>
 </header>
