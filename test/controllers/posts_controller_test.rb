@@ -26,4 +26,10 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form", 1
     assert_select "button", "Create Post"
   end
+
+  test "should destroy post" do
+    assert_difference "Post.count", -1 do
+      delete community_post_path(@community.slug, @post.slug)
+    end
+  end
 end

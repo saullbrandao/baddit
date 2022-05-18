@@ -24,6 +24,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find_by(slug: params[:slug])
+
+    @post.destroy
+
+    flash[:success] = "Post deleted successfully"
+    redirect_to :root
+  end
+
   private
 
   def post_params

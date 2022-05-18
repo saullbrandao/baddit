@@ -21,5 +21,7 @@
 			<span class="text-gray-400">Posted by u/user1 <%= time_ago_in_words(post.created_at) %> ago</span>
 		</div>
 		<%= link_to pluralize(post.comments.size, "comment"), community_post_url(post.community.slug, post.slug), class: "text-sm" %>
+		<%# TODO: get trash can icon %>
+		<%= button_to sanitize("&#128465"), community_post_path(post.community.slug, post.slug), method: :delete  %>
 	</div>
 </li>
