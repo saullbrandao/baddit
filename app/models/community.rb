@@ -1,7 +1,9 @@
 class Community < ApplicationRecord
-  has_many :posts, dependent: :destroy
-
   before_create :add_slug
+
+  has_many :posts, dependent: :destroy
+  has_many :users
+  belongs_to :owner, class_name: "User"
 
   validates :name, presence: true, length: { minimum: 3, maximum: 20 }, uniqueness: true
   validates :slug, uniqueness: true

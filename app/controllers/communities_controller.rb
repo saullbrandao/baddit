@@ -1,4 +1,7 @@
 class CommunitiesController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
+  before_action :correct_user, only: [:destroy]
+
   def show
     @community = Community.find_by(slug: params[:slug])
   end
@@ -8,7 +11,7 @@ class CommunitiesController < ApplicationController
   end
 
   def create
-    @community = Community.new(community_params)
+    @community = Community.new(name: community_params[:name], owner: current_user)
 
     if @community.save
       flash[:success] = "Community created!"
@@ -30,5 +33,10 @@ class CommunitiesController < ApplicationController
 
   def community_params
     params.require(:community).permit(:name)
+  end
+
+  def correct_user
+    @community = current_user.owned_communities.find_by(slug: params[:slug])
+    redirect_to :root unless @community
   end
 end

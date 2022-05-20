@@ -3,7 +3,9 @@
 one:
   name: Community A
   slug: CommunityA
+  owner: one
 
 two:
   name: Community B
   slug: CommunityB
+  owner: two

@@ -26,4 +26,9 @@ class CommunityTest < ActiveSupport::TestCase
     @community.slug = communities(:two).slug
     assert_not @community.valid?
   end
+
+  test "should have an owner" do
+    @community.owner = nil
+    assert_not @community.valid?
+  end
 end
