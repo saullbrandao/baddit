@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:destroy]
+
   def create
     @post = Post.find_by(slug: params[:post_slug])
-    @comment = @post.comments.new(comment_params)
+    @comment = @post.comments.new(body: comment_params[:body], user: current_user)
 
     if @comment.save
       flash[:success] = "Comment created successfully"
@@ -24,5 +27,10 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.permit(:body)
+  end
+
+  def correct_user
+    @comment = current_user.comments.find_by(id: params[:id])
+    redirect_to :root unless @comment
   end
 end

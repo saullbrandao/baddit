@@ -26,4 +26,9 @@ class CommentTest < ActiveSupport::TestCase
     @comment.post_id = nil
     assert_not @comment.valid?
   end
+  
+  test "should have a user" do
+    @comment.user_id = nil
+    assert_not @comment.valid?
+  end
 end
