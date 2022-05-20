@@ -1,6 +1,8 @@
 require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   def setup
     @post = posts(:one)
     @community = @post.community
@@ -19,15 +21,24 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_select "p", posts(:one).body
   end
 
-  test "should get new" do
+  test "should get new only if logged in" do
     get new_post_path
-    assert_response :success
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
+
+    sign_in users(:one)
+    get new_post_path
     assert_select "h1", "New Post"
-    assert_select "form", 1
     assert_select "button", "Create Post"
   end
 
-  test "should destroy post" do
+  test "should destroy post only if has ownership" do
+    sign_in users(:two)
+    assert_difference "Post.count", 0 do
+      delete community_post_path(@community.slug, @post.slug)
+    end
+
+    sign_in users(:one)
     assert_difference "Post.count", -1 do
       delete community_post_path(@community.slug, @post.slug)
     end

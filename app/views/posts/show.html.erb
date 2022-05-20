@@ -1,14 +1,18 @@
 <%= render 'communities/header' %>
 <section class="w-full flex flex-col justify-center items-center mt-8">
 	<article class="flex flex-col justify-center gap-2 bg-white p-4 rounded-md w-full">
-		<span class="text-gray-400 text-sm">Posted by u/user1 <%= time_ago_in_words(@post.created_at) %> ago</span>
+		<span class="text-gray-400 text-sm">Posted by u/<%="#{@post.user.username} #{time_ago_in_words(@post.created_at)}" %> ago</span>
 		<h1 class="font-bold text-xl">
 			<%= @post.title %>
 		</h1>
 		<p>
 			<%= @post.body %>
 		</p>
+		<% if current_user == @post.user %>
+			<%= button_to sanitize("&#128465"), community_post_path(@post.community.slug, @post.slug),method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}  %>
+		<% end %>
 	</article>
+
 </section>
 
 <section class="flex flex-col gap-2 mt-4">

@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:destroy]
+
   def index
     @posts = Post.all.order(total_votes: :desc)
   end
@@ -14,7 +17,8 @@ class PostsController < ApplicationController
 
   def create 
     @post = current_community.posts.build(title: post_params[:title], 
-                                          body: post_params[:body])
+                                          body: post_params[:body],
+                                          user: current_user)
 
     if @post.save
       redirect_to community_post_path(@community.slug, @post.slug), 
@@ -41,5 +45,10 @@ class PostsController < ApplicationController
 
   def current_community
     @community = Community.find_by(slug: post_params[:community])
+  end
+
+  def correct_user
+    @post = current_user.posts.find_by(slug: params[:slug])
+    redirect_to :root unless @post
   end
 end

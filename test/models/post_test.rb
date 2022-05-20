@@ -52,7 +52,7 @@ class PostTest < ActiveSupport::TestCase
   end
 
   test "should create a slug" do
-    post = Post.create!(title: "Test Title", body: "Test Body", community_id: communities(:one).id)
+    post = Post.create!(title: "Test Title", body: "Test Body", community_id: communities(:one).id, user: users(:one))
     assert post.slug == "test_title"
   end
 

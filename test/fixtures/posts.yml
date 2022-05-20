@@ -7,6 +7,7 @@ one:
   downvotes: 1
   total_votes: 3
   community: one
+  user: one
   slug: post_1
 
 two:
@@ -16,6 +17,7 @@ two:
   downvotes: 3
   total_votes: 4
   community: two
+  user: two
   slug: post_2
 
 three:
@@ -25,4 +27,5 @@ three:
   downvotes: 1
   total_votes: 3
   community: one
+  user: one
   slug: post_3
