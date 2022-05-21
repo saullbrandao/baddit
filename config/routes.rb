@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :posts, only: [:new, :create]
   resources :comments, only: [:destroy]
   resources :communities, param: :slug, path: 'b' do
+    post 'join'
+    delete 'leave'
     resources :posts, param: :slug, only: [:show, :destroy] do
       resources :comments, only: [:create]
     end

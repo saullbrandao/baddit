@@ -9,3 +9,8 @@ two:
   name: Community B
   slug: CommunityB
   owner: two
+
+three:
+  name: Community C
+  slug: CommunityC
+  owner: two

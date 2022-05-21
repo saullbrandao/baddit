@@ -2,9 +2,21 @@
 	<h1 class="text-lg font-semibold">
 		<%= link_to @community.name, community_path(@community.slug) %>
 	</h1>
-	<button class="bg-blue-500 w-24 text-sm py-2 rounded-full text-white hover:brightness-110 transition">Join</button>
-	<% if current_user == @community.owner %>
-		<%= button_to "Delete", community_path(@community.slug), method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}, 
+	<% if user_signed_in? %>
+		<% if current_user.owns?(@community) %>
+			<%= button_to "Delete", community_path(@community.slug), method: :delete, 
+                  form: { data: {turbo_confirm: "Are you sure?"}}, 
                   class: "bg-red-500 w-24 text-sm py-2 rounded-full text-white hover:brightness-110 transition" %>
+		<% else %>
+			<% if current_user.joined?(@community) %>
+				<%= button_to "Leave", community_leave_path(@community.slug),
+                    method: :delete, 
+                    form: { data: {turbo_confirm: "Are you sure?"}},
+                    class:"bg-red-500 w-24 text-sm py-2 rounded-full text-white hover:brightness-110 transition" %>
+			<% else %>
+				<%= button_to "Join", community_join_path(@community.slug),
+                    class:"bg-blue-500 w-24 text-sm py-2 rounded-full text-white hover:brightness-110 transition" %>
+			<% end %>
+		<% end %>
 	<% end %>
 </header>

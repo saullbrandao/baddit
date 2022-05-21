@@ -35,4 +35,26 @@ class CommunitiesControllerTest < ActionDispatch::IntegrationTest
       delete community_path(@community.slug)
     end
   end
+
+  test "should join community only if logged in" do
+    post community_join_path(@community.slug)
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
+    
+    sign_in users(:one)
+    post community_join_path(@community.slug)
+    assert_response :redirect
+    assert_redirected_to community_path(@community.slug)
+  end
+    
+  test "should leave community only if logged in" do
+    delete community_leave_path(@community.slug)
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
+
+    sign_in users(:one)
+    delete community_leave_path(@community.slug)
+    assert_response :redirect
+    assert_redirected_to community_path(@community.slug)
+  end
 end

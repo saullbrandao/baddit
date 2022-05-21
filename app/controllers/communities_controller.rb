@@ -29,6 +29,22 @@ class CommunitiesController < ApplicationController
     redirect_to :root
   end
 
+  def join
+    @community = Community.find_by(slug: params[:community_slug])
+    current_user.join(@community)
+
+    flash[:success] = "Joined community!"
+    redirect_to community_path(@community.slug)
+  end
+
+  def leave
+    @community = Community.find_by(slug: params[:community_slug])
+    current_user.leave(@community)
+
+    flash[:success] = "Left community!"
+    redirect_to community_path(@community.slug)
+  end
+
   private
 
   def community_params
@@ -38,5 +54,5 @@ class CommunitiesController < ApplicationController
   def correct_user
     @community = current_user.owned_communities.find_by(slug: params[:slug])
     redirect_to :root unless @community
-  end
+  end 
 end

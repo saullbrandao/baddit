@@ -38,4 +38,44 @@ class UserTest < ActiveSupport::TestCase
     @user.password = "a" * 5
     assert_not @user.valid?
   end
+
+  test "should join community" do
+    @user.join(communities(:two))
+    assert_equal 1, @user.communities.count
+  end
+
+  test "should leave community" do
+    @user.join(communities(:two))
+    assert_equal 1, @user.communities.count
+
+    @user.leave(communities(:two))
+    assert_equal 0, @user.communities.count
+  end
+
+  test "should not join community if already joined" do
+    @user.join(communities(:two))
+    assert_equal 1, @user.communities.count
+
+    @user.join(communities(:two))
+    assert_equal 1, @user.communities.count
+  end
+
+  test "should not leave community if not joined" do
+    @user.leave(communities(:two))
+    assert_equal 0, @user.communities.count
+  end
+
+  test "should not join or leave a community if owns" do
+    @user.join(communities(:one))
+    assert_equal 0, @user.communities.count
+
+    @user.leave(communities(:one))
+    assert_equal 0, @user.communities.count
+  end
+
+  test "should return true if joined and false if not" do
+    @user.join(communities(:two))
+    assert_equal true, @user.joined?(communities(:two))
+    assert_equal false, @user.joined?(communities(:three))
+  end
 end
