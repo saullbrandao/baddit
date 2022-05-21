@@ -25,13 +25,13 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get new_post_path
     assert_response :redirect
     assert_redirected_to new_user_session_path
-
+    
     sign_in users(:one)
     get new_post_path
     assert_select "h1", "New Post"
     assert_select "button", "Create Post"
   end
-
+  
   test "should destroy post only if has ownership" do
     sign_in users(:two)
     assert_difference "Post.count", 0 do

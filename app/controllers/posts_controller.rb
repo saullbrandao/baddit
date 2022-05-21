@@ -16,15 +16,21 @@ class PostsController < ApplicationController
   end
 
   def create 
-    @post = current_community.posts.build(title: post_params[:title], 
-                                          body: post_params[:body],
-                                          user: current_user)
+    if can_post?
+      @post = current_community.posts.build(title: post_params[:title], 
+                                            body: post_params[:body],
+                                            user: current_user)
+  
+      if @post.save
+        redirect_to community_post_path(@community.slug, @post.slug), 
+                                  success: "Post created successfully"
+      else
+        render :new, status: :unprocessable_entity
+      end
 
-    if @post.save
-      redirect_to community_post_path(@community.slug, @post.slug), 
-                                success: "Post created successfully"
     else
-      render :new, status: :unprocessable_entity
+      flash[:error] = "You are not allowed to post in this community"
+      redirect_to :root
     end
   end
 
@@ -50,5 +56,9 @@ class PostsController < ApplicationController
   def correct_user
     @post = current_user.posts.find_by(slug: params[:slug])
     redirect_to :root unless @post
+  end
+
+  def can_post?
+    current_community.users.include?(current_user) || current_user.owns?(current_community)
   end
 end
