@@ -2,7 +2,7 @@ require 'faker'
 
 # Create users
 30.times do |i|
-  User.create(
+  User.create!(
     email: Faker::Internet.email,
     username: Faker::Internet.username,
     password: 'password',
@@ -14,7 +14,7 @@ users = User.all
 
 # Create communities
 ['rails', 'ruby', 'webdev', 'fullstack', 'programming'].each do |name|
-  Community.create(name: name, owner_id: users.sample.id )
+  Community.create!(name: name, owner_id: users.sample.id )
 end
 
 communities = Community.all
@@ -22,12 +22,16 @@ communities = Community.all
 # Create posts and comments
 communities.each do |community|
   3.times do |i|
-    community.posts.create(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph_by_chars(number: 500), user: users.sample)
-    community.posts.last.comments.create(body: Faker::Lorem.sentence, user: users.sample)
+    post = community.posts.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph_by_chars(number: 500), user: users.sample)
+    
+    rand(1..30).times do |i|
+      post.comments.create!(body: Faker::Lorem.sentence, user: users.sample)
+      post.votes.create!(user: users[i], vote: [1, -1].sample)
+    end
   end
 end
 
-User.create(
+User.create!(
   email: 'test@test',
   username: 'test',
   password: '123123',
