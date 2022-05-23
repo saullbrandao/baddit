@@ -43,6 +43,24 @@ class PostsController < ApplicationController
     redirect_to :root
   end
 
+  def upvote 
+    @post = Post.find_by(slug: params[:post_slug])
+    Vote.upvote(current_user, @post)
+    
+    flash[:error] = "Error while saving vote" unless @post.save
+
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote 
+    @post = Post.find_by(slug: params[:post_slug])
+    Vote.downvote(current_user, @post)
+    
+    flash[:error] = "Error while saving vote" unless @post.save
+
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def post_params

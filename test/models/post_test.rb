@@ -56,11 +56,37 @@ class PostTest < ActiveSupport::TestCase
     assert post.slug == "test_title"
   end
 
-  test "should calculate total_votes" do
-    assert @post.total_votes == @post.upvotes + @post.downvotes
+  test "should update total_votes" do
+    assert_difference "@post.votes.count", 1 do
+      @post.votes.create!(vote: 1, user: users(:one), votable: @post)
+    end
+
+    assert_equal 1, @post.total_votes
+
+    assert_difference "@post.votes.count", 1 do
+      @post.votes.create!(vote: 1, user: users(:two), votable: @post)
+    end
+
+    assert_equal 2, @post.total_votes
   end
 
-  test "should calculate votes_difference" do
-    assert @post.votes_difference == @post.upvotes - @post.downvotes
+  test "should update karma" do
+    assert_difference "@post.votes.count", 1 do
+      @post.votes.create!(vote: 1, user: users(:one), votable: @post)
+    end
+
+    assert_equal 1, @post.karma
+
+    assert_difference "@post.votes.count", 1 do
+      @post.votes.create!(vote: 1, user: users(:two), votable: @post)
+    end
+
+    assert_equal 2, @post.karma
+    
+    assert_difference "@post.votes.count", 1 do
+      @post.votes.create!(vote: -1, user: users(:three), votable: @post)
+    end
+
+    assert_equal 1, @post.karma
   end
 end

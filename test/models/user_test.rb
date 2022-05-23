@@ -78,4 +78,18 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, @user.joined?(communities(:two))
     assert_equal false, @user.joined?(communities(:three))
   end
+
+  test "should return true if owns and false if not" do
+    assert_equal true, @user.owns?(communities(:one))
+    assert_equal false, @user.owns?(communities(:two))
+  end
+
+  test "should return true if voted and false if not" do
+    post = posts(:one)
+    Vote.upvote(@user, post)
+    
+    assert_equal true, @user.voted_with?(posts(:one), "Post", 1)
+    assert_equal false, @user.voted_with?(posts(:two), "Post", 1)
+  end
+
 end

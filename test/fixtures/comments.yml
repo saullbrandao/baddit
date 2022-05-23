@@ -2,14 +2,10 @@
 
 one:
   body: MyString1
-  upvote: 1
-  downvote: 1
   post: one
   user: one
 
 two:
   body: MyString2
-  upvote: 2
-  downvote: 2
   post: two
   user: two

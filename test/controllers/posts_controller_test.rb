@@ -43,4 +43,30 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       delete community_post_path(@community.slug, @post.slug)
     end
   end
+
+  test "should upvote post" do
+    sign_in users(:one)
+    assert_difference "Post.find(#{@post.id}).votes.count", 1 do
+      post community_post_upvote_path(@community.slug, @post.slug)
+    end
+    assert_equal 1, @post.votes.first.vote
+  end
+
+  test "should dowvote post" do
+    sign_in users(:one)
+    assert_difference "Post.find(#{@post.id}).votes.count", 1 do
+      post community_post_downvote_path(@community.slug, @post.slug)
+    end
+    assert_equal -1, @post.votes.first.vote
+  end
+
+  test "should not upvote or downvote post if not logged in" do
+    assert_difference "Post.find(#{@post.id}).votes.count", 0 do
+      post community_post_upvote_path(@community.slug, @post.slug)
+    end
+
+    assert_difference "Post.find(#{@post.id}).votes.count", 0 do
+      post community_post_downvote_path(@community.slug, @post.slug)
+    end
+  end
 end

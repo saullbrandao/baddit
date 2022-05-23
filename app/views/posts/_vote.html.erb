@@ -1,0 +1,14 @@
+<div class="flex flex-col justify-between items-center px-4">
+	<%= button_to sanitize("&#8593"), 
+                  community_post_upvote_path(post.community.slug, post.slug), 
+                  method: :post, 
+                  class: vote_button_class(post, "Post",  1) %>
+
+	<span class="text-xs font-bold">
+		<%= post.karma %>
+	</span>
+	<%= button_to sanitize("&#8595"), 
+                  community_post_downvote_path(post.community.slug, post.slug), 
+                  method: :post, 
+                  class: vote_button_class(post, "Post", -1) %>
+</div>

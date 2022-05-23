@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     post 'join'
     delete 'leave'
     resources :posts, param: :slug, only: [:show, :destroy] do
+      post 'upvote'
+      post 'downvote'
       resources :comments, only: [:create]
     end
   end

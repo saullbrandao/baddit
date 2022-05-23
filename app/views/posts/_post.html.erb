@@ -1,14 +1,5 @@
 <li class="flex bg-white py-2">
-	<%# TODO: get upvote and downvote icons %>
-	<div class="flex flex-col justify-between items-center px-4">
-		<span>&#8593
-		</span>
-		<span class="text-xs font-bold">
-			<%= post.votes_difference %>
-		</span>
-		<span>&#8595
-		</span>
-	</div>
+	<%= render 'posts/vote', post: post  %>
 
 	<div class="flex flex-col gap-1">
 		<h2 class="font-semibold">

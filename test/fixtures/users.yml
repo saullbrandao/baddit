@@ -7,3 +7,8 @@ two:
   username: user2
   email: user2@test.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+three:
+  username: user3
+  email: user3@test.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

@@ -22,7 +22,7 @@ communities = Community.all
 # Create posts and comments
 communities.each do |community|
   3.times do |i|
-    community.posts.create(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph_by_chars(number: 500), upvotes: rand(0..50), downvotes: rand(0..50), user: users.sample)
+    community.posts.create(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph_by_chars(number: 500), user: users.sample)
     community.posts.last.comments.create(body: Faker::Lorem.sentence, user: users.sample)
   end
 end

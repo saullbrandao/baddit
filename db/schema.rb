@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_113239) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_113519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.string "body", null: false
-    t.integer "upvote", default: 0
-    t.integer "downvote", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "post_id"
     t.bigint "parent_comment_id"
     t.bigint "user_id"
+    t.integer "karma", default: 0
+    t.integer "total_votes", default: 0
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -53,9 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_113239) do
     t.datetime "updated_at", null: false
     t.bigint "community_id"
     t.string "slug"
-    t.integer "upvotes", default: 0
-    t.integer "downvotes", default: 0
     t.bigint "user_id"
+    t.integer "karma", default: 0
     t.index ["community_id"], name: "index_posts_on_community_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -71,6 +70,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_113239) do
     t.string "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "vote"
+    t.string "votable_type"
+    t.bigint "votable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
   end
 
   add_foreign_key "comments", "comments", column: "parent_comment_id"
