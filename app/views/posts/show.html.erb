@@ -2,8 +2,8 @@
 <section class="w-full flex justify-center bg-white items-center py-4 mt-8 rounded-md">
 	<%= render 'shared/vote', 
              votable: @post, 
-             upvote_path: community_post_upvote_path(@post.community.slug, @post.slug),
-             downvote_path: community_post_downvote_path(@post.community.slug, @post.slug) %>
+             upvote_path: post_upvote_path(@post.id),
+             downvote_path: post_downvote_path(@post.id) %>
 	<article class="flex flex-col justify-center gap-2  ">
 		<span class="text-gray-400 text-sm">Posted by u/<%="#{@post.user.username} #{time_ago_in_words(@post.created_at)}" %> ago</span>
 		<h1 class="font-bold text-xl">

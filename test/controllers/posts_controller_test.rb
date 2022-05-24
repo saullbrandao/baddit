@@ -47,7 +47,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should upvote post" do
     sign_in users(:one)
     assert_difference "Post.find(#{@post.id}).votes.count", 1 do
-      post community_post_upvote_path(@community.slug, @post.slug)
+      post post_upvote_path(@post.id)
     end
     assert_equal 1, @post.votes.first.vote
   end
@@ -55,18 +55,18 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should dowvote post" do
     sign_in users(:one)
     assert_difference "Post.find(#{@post.id}).votes.count", 1 do
-      post community_post_downvote_path(@community.slug, @post.slug)
+      post post_downvote_path(@post.id)
     end
     assert_equal -1, @post.votes.first.vote
   end
 
   test "should not upvote or downvote post if not logged in" do
     assert_difference "Post.find(#{@post.id}).votes.count", 0 do
-      post community_post_upvote_path(@community.slug, @post.slug)
+      post post_upvote_path(@post.id)
     end
 
     assert_difference "Post.find(#{@post.id}).votes.count", 0 do
-      post community_post_downvote_path(@community.slug, @post.slug)
+      post post_downvote_path(@post.id)
     end
   end
 end
