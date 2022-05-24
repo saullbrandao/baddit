@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   
   root 'posts#index'
   resources :posts, only: [:new, :create]
-  resources :comments, only: [:destroy]
+  resources :comments, only: [:destroy] do
+    post 'upvote'
+    post 'downvote'
+  end
   resources :communities, param: :slug, path: 'b' do
     post 'join'
     delete 'leave'

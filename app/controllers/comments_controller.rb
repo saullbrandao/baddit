@@ -23,6 +23,24 @@ class CommentsController < ApplicationController
     redirect_to posts_path(slug: @comment.post.slug)
   end
 
+  def upvote 
+    @comment = Comment.find_by(id: params[:comment_id])
+    Vote.upvote(current_user, @comment)
+    
+    flash[:error] = "Error while saving vote" unless @comment.save
+
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote 
+    @comment = Comment.find_by(id: params[:comment_id])
+    Vote.downvote(current_user, @comment)
+    
+    flash[:error] = "Error while saving vote" unless @comment.save
+
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def comment_params

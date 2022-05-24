@@ -88,8 +88,8 @@ class UserTest < ActiveSupport::TestCase
     post = posts(:one)
     Vote.upvote(@user, post)
     
-    assert_equal true, @user.voted_with?(posts(:one), "Post", 1)
-    assert_equal false, @user.voted_with?(posts(:two), "Post", 1)
+    assert_equal true, @user.voted_with?(posts(:one), 1)
+    assert_equal false, @user.voted_with?(posts(:two), 1)
   end
 
 end

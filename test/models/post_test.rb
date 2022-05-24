@@ -55,38 +55,4 @@ class PostTest < ActiveSupport::TestCase
     post = Post.create!(title: "Test Title", body: "Test Body", community_id: communities(:one).id, user: users(:one))
     assert post.slug == "test_title"
   end
-
-  test "should update total_votes" do
-    assert_difference "@post.votes.count", 1 do
-      @post.votes.create!(vote: 1, user: users(:one), votable: @post)
-    end
-
-    assert_equal 1, @post.total_votes
-
-    assert_difference "@post.votes.count", 1 do
-      @post.votes.create!(vote: 1, user: users(:two), votable: @post)
-    end
-
-    assert_equal 2, @post.total_votes
-  end
-
-  test "should update karma" do
-    assert_difference "@post.votes.count", 1 do
-      @post.votes.create!(vote: 1, user: users(:one), votable: @post)
-    end
-
-    assert_equal 1, @post.karma
-
-    assert_difference "@post.votes.count", 1 do
-      @post.votes.create!(vote: 1, user: users(:two), votable: @post)
-    end
-
-    assert_equal 2, @post.karma
-    
-    assert_difference "@post.votes.count", 1 do
-      @post.votes.create!(vote: -1, user: users(:three), votable: @post)
-    end
-
-    assert_equal 1, @post.karma
-  end
 end

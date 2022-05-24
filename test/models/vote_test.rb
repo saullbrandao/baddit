@@ -76,4 +76,44 @@ class VoteTest < ActiveSupport::TestCase
     end
     assert_equal -1, post.votes.last.vote
   end
+  
+  test "should update total_votes" do
+    post = posts(:one)
+    user = users(:one)
+
+    assert_difference "post.votes.count", 1 do
+      post.votes.create!(vote: 1, user: users(:one), votable: post)
+    end
+
+    assert_equal 1, post.total_votes
+
+    assert_difference "post.votes.count", 1 do
+      post.votes.create!(vote: 1, user: users(:two), votable: post)
+    end
+
+    assert_equal 2, post.total_votes
+  end
+
+  test "should update karma" do
+    comment = comments(:one)
+    user = users(:one)
+
+    assert_difference "comment.votes.count", 1 do
+      comment.votes.create!(vote: 1, user: users(:one), votable: comment)
+    end
+
+    assert_equal 1, comment.karma
+
+    assert_difference "comment.votes.count", 1 do
+      comment.votes.create!(vote: 1, user: users(:two), votable: comment)
+    end
+
+    assert_equal 2, comment.karma
+    
+    assert_difference "comment.votes.count", 1 do
+      comment.votes.create!(vote: -1, user: users(:three), votable: comment)
+    end
+
+    assert_equal 1, comment.karma
+  end
 end

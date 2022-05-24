@@ -1,5 +1,8 @@
 <li class="flex bg-white py-2">
-	<%= render 'posts/vote', post: post  %>
+	<%= render 'shared/vote', 
+             votable: post, 
+             upvote_path: community_post_upvote_path(post.community.slug, post.slug),
+             downvote_path: community_post_downvote_path(post.community.slug, post.slug) %>
 
 	<div class="flex flex-col gap-1">
 		<h2 class="font-semibold">

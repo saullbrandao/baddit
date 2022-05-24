@@ -27,7 +27,7 @@ class User < ApplicationRecord
     community.owner == self
   end 
 
-  def voted_with?(votable, type, vote)
-    votes.where(votable_id: votable.id, votable_type: type, vote: vote).any?
+  def voted_with?(votable, vote)
+    votes.where(votable_id: votable.id, votable_type: votable.class.name, vote: vote).any?
   end
 end
