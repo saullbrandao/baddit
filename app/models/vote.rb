@@ -1,5 +1,7 @@
 class Vote < ApplicationRecord
   after_save :update_total_votes, :update_karma
+  after_update :update_total_votes, :update_karma
+  after_destroy :update_total_votes, :update_karma
 
   belongs_to :user
   belongs_to :votable, polymorphic: true
