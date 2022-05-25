@@ -22,14 +22,14 @@ class PostsController < ApplicationController
                                             user: current_user)
   
       if @post.save
-        redirect_to community_post_path(@community.slug, @post.slug), 
-                                  success: "Post created successfully"
+        flash[:success] = "Post created successfully!"
+        redirect_to community_post_path(@community.slug, @post.slug)
       else
         render :new, status: :unprocessable_entity
       end
 
     else
-      flash[:error] = "You are not allowed to post in this community"
+      flash[:error] = "You are not allowed to post in this community!"
       redirect_to :root
     end
   end
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
 
-    flash[:success] = "Post deleted successfully"
+    flash[:success] = "Post deleted successfully!"
     redirect_to :root
   end
 
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:post_id])
     Vote.upvote(current_user, @post)
     
-    flash[:error] = "Error while saving vote" unless @post.save
+    flash[:error] = "Error while saving vote!" unless @post.save
     
     redirect_back(fallback_location: root_path)
   end
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:post_id])
     Vote.downvote(current_user, @post)
     
-    flash[:error] = "Error while saving vote" unless @post.save
+    flash[:error] = "Error while saving vote!" unless @post.save
 
     redirect_back(fallback_location: root_path)
   end

@@ -7,10 +7,10 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(body: comment_params[:body], user: current_user)
 
     if @comment.save
-      flash[:success] = "Comment created successfully"
+      flash[:success] = "Comment created successfully!"
       redirect_to community_post_path(slug: @comment.post.slug)
     else
-      flash[:error] = "Comment could not be created"
+      flash[:error] = "Comment could not be created!"
       redirect_to request.referrer
     end
   end
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
 
-    flash[:success] = "Comment deleted successfully"
+    flash[:success] = "Comment deleted successfully!"
     redirect_to posts_path(slug: @comment.post.slug)
   end
 
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(id: params[:comment_id])
     Vote.upvote(current_user, @comment)
     
-    flash[:error] = "Error while saving vote" unless @comment.save
+    flash[:error] = "Error while saving vote!" unless @comment.save
 
     redirect_back(fallback_location: root_path)
   end
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(id: params[:comment_id])
     Vote.downvote(current_user, @comment)
     
-    flash[:error] = "Error while saving vote" unless @comment.save
+    flash[:error] = "Error while saving vote!" unless @comment.save
 
     redirect_back(fallback_location: root_path)
   end
