@@ -7,7 +7,12 @@
 		<div class="flex gap-1 items-center">
 			<span class="text-gray-400 text-sm">Posted by u/<%="#{comment.user.username} #{time_ago_in_words(comment.created_at)}" %> ago</span>
 			<% if current_user == comment.user %>
-				<%= button_to sanitize("&#128465"), comment_path(comment), method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}  %>
+				<%= button_to comment_path(comment), 
+                      method: :delete, 
+                      form: { data: {turbo_confirm: "Are you sure?"}},
+                      class: "flex justify-center items-center w-6 h-6 fill-gray-400 hover:bg-gray-200 hover:fill-black" do %>
+					<%= inline_svg_tag 'trash.svg', class: "w-4 h-4 " %>
+				<% end %>
 			<% end %>
 		</div>
 		<p class="break-all">

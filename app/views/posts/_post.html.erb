@@ -9,10 +9,15 @@
 			<h2 class="font-semibold">
 				<%= link_to post.title, community_post_url(post.community.slug, post.slug) %>
 			</h2>
-			<%# TODO: get trash can icon %>
 			<% if current_user == post.user %>
-				<%= button_to sanitize("&#128465"), community_post_path(post.community.slug, post.slug), method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}  %>
+				<%= button_to community_post_path(post.community.slug, post.slug), 
+                      method: :delete, 
+                      form: { data: {turbo_confirm: "Are you sure?"}},
+                      class: "flex justify-center items-center w-6 h-6 fill-gray-400 hover:bg-gray-200 hover:fill-black" do %>
+					<%= inline_svg_tag 'trash.svg', class: "w-4 h-4 " %>
+				<% end %>
 			<% end %>
+
 		</div>
 		<div class="text-xs">
 			<% unless current_page?(community_path(post.community.slug)) %>
