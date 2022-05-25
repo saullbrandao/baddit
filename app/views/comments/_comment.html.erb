@@ -1,15 +1,18 @@
-<li class="flex w-full bg-white py-4">
+<li class="flex w-full bg-white p-2 gap-2">
 	<%= render 'shared/vote',
              votable: comment, 
              upvote_path: comment_upvote_path(comment),
              downvote_path: comment_downvote_path(comment)%>
 	<article class=" flex flex-col justify-center gap-2  rounded-md">
-		<span class="text-gray-400 text-sm">Posted by u/<%="#{comment.user.username} #{time_ago_in_words(comment.created_at)}" %> ago</span>
+		<div class="flex gap-1 items-center">
+			<span class="text-gray-400 text-sm">Posted by u/<%="#{comment.user.username} #{time_ago_in_words(comment.created_at)}" %> ago</span>
+			<% if current_user == comment.user %>
+				<%= button_to sanitize("&#128465"), comment_path(comment), method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}  %>
+			<% end %>
+		</div>
 		<p class="break-all">
 			<%= comment.body %>
 		</p>
-		<% if current_user == comment.user %>
-			<%= button_to sanitize("&#128465"), comment_path(comment), method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}  %>
-		<% end %>
+
 	</article>
 </li>

@@ -1,20 +1,22 @@
 <%= render 'communities/header' %>
-<section class="w-full flex justify-center bg-white items-center py-4 mt-8 rounded-md">
+<section class="w-full flex gap-2 bg-white items-center p-2 mt-8 rounded-md">
 	<%= render 'shared/vote', 
              votable: @post, 
              upvote_path: post_upvote_path(@post.id),
              downvote_path: post_downvote_path(@post.id) %>
-	<article class="flex flex-col justify-center gap-2  ">
-		<span class="text-gray-400 text-sm">Posted by u/<%="#{@post.user.username} #{time_ago_in_words(@post.created_at)}" %> ago</span>
+	<article class="flex flex-col flex-1 justify-center gap-1">
+		<div class="flex gap-2 items-center">
+			<span class="text-gray-400 text-sm">Posted by u/<%="#{@post.user.username} #{time_ago_in_words(@post.created_at)}" %> ago</span>
+			<% if current_user == @post.user %>
+				<%= button_to sanitize("&#128465"), community_post_path(@post.community.slug, @post.slug),method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}  %>
+			<% end %>
+		</div>
 		<h1 class="font-bold text-xl">
 			<%= @post.title %>
 		</h1>
 		<p>
 			<%= @post.body %>
 		</p>
-		<% if current_user == @post.user %>
-			<%= button_to sanitize("&#128465"), community_post_path(@post.community.slug, @post.slug),method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}  %>
-		<% end %>
 	</article>
 
 </section>
