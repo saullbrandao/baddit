@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   root 'posts#index'
 
-  resources :posts, only: [:new, :create] do
+  resources :posts, only: [:new, :create, :destroy] do
     post 'upvote'
     post 'downvote'
   end
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     post 'join'
     delete 'leave'
   
-    resources :posts, param: :slug, only: [:show, :destroy] do
+    resources :posts, param: :slug, only: [:show] do
       resources :comments, only: [:create]
     end
   end

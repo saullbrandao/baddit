@@ -35,12 +35,12 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should destroy post only if has ownership" do
     sign_in users(:two)
     assert_difference "Post.count", 0 do
-      delete community_post_path(@community.slug, @post.slug)
+      delete post_path(@post)
     end
 
     sign_in users(:one)
     assert_difference "Post.count", -1 do
-      delete community_post_path(@community.slug, @post.slug)
+      delete post_path(@post)
     end
   end
 

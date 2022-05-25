@@ -35,8 +35,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(slug: params[:slug])
-
+    @post = Post.find(params[:id])
     @post.destroy
 
     flash[:success] = "Post deleted successfully"
@@ -72,8 +71,8 @@ class PostsController < ApplicationController
   end
 
   def correct_user
-    @post = current_user.posts.find_by(slug: params[:slug])
-    redirect_to :root unless @post
+    @user = Post.find(params[:id]).user
+    redirect_to :root unless @user == current_user
   end
 
   def can_post?
