@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   resources :posts, only: [:new, :create, :destroy] do
-    post 'upvote'
-    post 'downvote'
+    patch 'upvote'
+    patch 'downvote'
   end
 
   resources :comments, only: [:destroy] do
-    post 'upvote'
-    post 'downvote'
+    patch 'upvote'
+    patch 'downvote'
   end
 
   resources :communities, param: :slug, path: 'b' do

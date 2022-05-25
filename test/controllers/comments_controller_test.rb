@@ -26,7 +26,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "should upvote comment" do
     sign_in users(:one)
     assert_difference "Comment.find(#{@comment.id}).votes.count", 1 do
-      post comment_upvote_path(@comment)
+      patch comment_upvote_path(@comment)
     end
     assert_equal 1, @comment.votes.first.vote
   end
@@ -34,18 +34,18 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "should dowvote comment" do
     sign_in users(:one)
     assert_difference "Comment.find(#{@comment.id}).votes.count", 1 do
-      post comment_downvote_path(@comment)
+      patch comment_downvote_path(@comment)
     end
     assert_equal -1, @comment.votes.first.vote
   end
 
   test "should not upvote or downvote comment if not logged in" do
     assert_difference "Comment.find(#{@comment.id}).votes.count", 0 do
-      post comment_upvote_path(@comment)
+      patch comment_upvote_path(@comment)
     end
 
     assert_difference "Comment.find(#{@comment.id}).votes.count", 0 do
-      post comment_downvote_path(@comment)
+      patch comment_downvote_path(@comment)
     end
   end
 end

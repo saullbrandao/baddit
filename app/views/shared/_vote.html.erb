@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-between items-center">
 	<%= button_to sanitize("&#8593"), 
                   upvote_path, 
-                  method: :post, 
+                  method: :patch, 
                   class: vote_button_class(votable, 1) %>
 
 	<span class="text-xs font-bold">
@@ -9,6 +9,6 @@
 	</span>
 	<%= button_to sanitize("&#8595"), 
                   downvote_path, 
-                  method: :post, 
+                  method: :patch, 
                   class: vote_button_class(votable, -1) %>
 </div>
