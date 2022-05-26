@@ -5,7 +5,7 @@
              downvote_path: comment_downvote_path(comment)%>
 	<article class=" flex flex-col justify-center gap-2  rounded-md">
 		<div class="flex gap-1 items-center">
-			<span class="text-gray-400 text-sm">Posted by u/<%="#{comment.user.username} #{time_ago_in_words(comment.created_at)}" %> ago</span>
+			<span class="text-gray-500 text-sm">Posted by u/<%="#{comment.user.username} #{time_ago_in_words(comment.created_at)}" %> ago</span>
 			<%= render 'shared/delete',
                  deletable: comment, 
                  deletable_path: comment_path(comment)  %>
