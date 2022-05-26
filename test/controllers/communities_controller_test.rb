@@ -24,6 +24,24 @@ class CommunitiesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", "New Community"
   end
 
+  test "should create community" do
+    sign_in users(:one)
+
+    assert_difference("Community.count", 1) do
+      post communities_path, params: { community: { name: "Test Community" } }
+    end
+
+    assert_redirected_to community_path(Community.last.slug)
+  end
+
+  test "should not create community if not logged in" do
+    assert_difference("Community.count", 0) do
+      post communities_path, params: { community: { name: "Test Community" } }
+    end
+
+    assert_redirected_to new_user_session_path
+  end
+
   test "should destroy community only if has ownership" do
     sign_in users(:two)
     assert_difference "Community.count", 0 do
