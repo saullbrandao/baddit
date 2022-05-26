@@ -19,7 +19,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", posts(:one).title
     assert_select "p", posts(:one).body
-  end
+  end 
 
   test "should get new only if logged in" do
     get new_post_path
@@ -31,7 +31,29 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", "New Post"
     assert_select "button", "Create Post"
   end
+
+  test "should create post" do
+    sign_in users(:one)
+
+    assert_difference "Post.count", 1 do
+      post posts_path, params: { post: { title: "Test Post",
+                                         body: "Test Body",
+                                         community: communities(:one).slug } }
+    end
+
+    assert_redirected_to community_post_path(@community.slug, Post.last.slug)
+  end
   
+  test "should not create post if not logged in" do
+    assert_difference "Post.count", 0 do
+      post posts_path, params: { post: { title: "Test Post",
+                                         body: "Test Body",
+                                         community: communities(:one).slug } }
+    end
+
+    assert_redirected_to new_user_session_path
+  end
+
   test "should destroy post only if has ownership" do
     sign_in users(:two)
     assert_difference "Post.count", 0 do
