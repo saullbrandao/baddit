@@ -23,7 +23,7 @@
 	<%= render 'comments/form' %>
 	<h2 class="font-bold mb-2">Comments</h2>
 	<ul class="flex flex-col gap-2 mb-2">
-		<% @post.comments.each do |comment| %>
+		<% @post.ordered_comments.each do |comment| %>
 			<%= render 'comments/comment', comment: comment %>
 		<% end %>
 	</ul>

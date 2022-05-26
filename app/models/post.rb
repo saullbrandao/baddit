@@ -10,6 +10,10 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :community_id }
   validates :body, presence: true, length: { minimum: 3, maximum: 500 }
   validates :slug, uniqueness: { scope: :community_id }
+
+  def ordered_comments
+    comments.order(karma: :desc)
+  end
   
   private
   
