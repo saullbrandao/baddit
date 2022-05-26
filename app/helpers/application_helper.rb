@@ -1,9 +1,10 @@
 module ApplicationHelper
   def vote_button_class(votable, vote)
+    base_class = "hover:bg-gray-200 rounded"
     if current_user && current_user.voted_with?(votable, vote)
-      "text-red-600"
+      "text-red-600 #{base_class}"
     else
-      ""
+      base_class
     end
   end
 
