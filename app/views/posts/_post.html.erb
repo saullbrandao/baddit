@@ -9,14 +9,7 @@
 			<h2 class="font-semibold">
 				<%= link_to post.title, community_post_url(post.community.slug, post.slug) %>
 			</h2>
-			<% if current_user == post.user %>
-				<%= button_to post_path(post), 
-                      method: :delete, 
-                      form: { data: {turbo_confirm: "Are you sure?"}},
-                      class: "flex justify-center items-center w-6 h-6 fill-gray-400 hover:bg-gray-200 hover:fill-black" do %>
-					<%= inline_svg_tag 'trash.svg', class: "w-4 h-4 " %>
-				<% end %>
-			<% end %>
+			<%= render 'shared/delete', deletable: post, deletable_path: post_path(post)  %>
 
 		</div>
 		<div class="text-xs">

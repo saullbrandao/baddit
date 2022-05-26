@@ -6,14 +6,10 @@
 	<article class=" flex flex-col justify-center gap-2  rounded-md">
 		<div class="flex gap-1 items-center">
 			<span class="text-gray-400 text-sm">Posted by u/<%="#{comment.user.username} #{time_ago_in_words(comment.created_at)}" %> ago</span>
-			<% if current_user == comment.user %>
-				<%= button_to comment_path(comment), 
-                      method: :delete, 
-                      form: { data: {turbo_confirm: "Are you sure?"}},
-                      class: "flex justify-center items-center w-6 h-6 fill-gray-400 hover:bg-gray-200 hover:fill-black" do %>
-					<%= inline_svg_tag 'trash.svg', class: "w-4 h-4 " %>
-				<% end %>
-			<% end %>
+			<%= render 'shared/delete',
+                 deletable: comment, 
+                 deletable_path: comment_path(comment)  %>
+
 		</div>
 		<p class="break-all">
 			<%= comment.body %>

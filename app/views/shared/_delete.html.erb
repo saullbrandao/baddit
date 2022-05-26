@@ -1,0 +1,8 @@
+<% if current_user == deletable.user %>
+	<%= button_to deletable_path, 
+                      method: :delete, 
+                      form: { data: {turbo_confirm: "Are you sure?"}},
+                      class: "flex justify-center items-center w-6 h-6 fill-gray-400 hover:bg-red-100 hover:fill-red-800" do %>
+		<%= inline_svg_tag 'trash.svg', class: "w-4 h-4 " %>
+	<% end %>
+<% end %>
