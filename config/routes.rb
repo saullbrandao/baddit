@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:new, :create, :destroy] do
     patch 'upvote'
     patch 'downvote'
+    resources :comments, only: [:create]
   end
 
   resources :comments, only: [:destroy] do
@@ -16,9 +17,6 @@ Rails.application.routes.draw do
   resources :communities, param: :slug, path: 'b' do
     post 'join'
     delete 'leave'
-  
-    resources :posts, param: :slug, only: [:show] do
-      resources :comments, only: [:create]
-    end
+    resources :posts, param: :slug, only: [:show]
   end
 end

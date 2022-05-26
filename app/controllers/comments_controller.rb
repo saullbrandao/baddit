@@ -3,16 +3,17 @@ class CommentsController < ApplicationController
   before_action :correct_user, only: [:destroy]
 
   def create
-    @post = Post.find_by(slug: params[:post_slug])
+    @post = Post.find_by(id: params[:post_id])
     @comment = @post.comments.new(body: comment_params[:body], user: current_user)
 
     if @comment.save
       flash[:success] = "Comment created successfully!"
-      redirect_to community_post_path(slug: @comment.post.slug)
+      redirect_to community_post_path(@post.community.slug, @post.slug)
     else
       flash[:error] = "Comment could not be created!"
-      redirect_to request.referrer
+      redirect_to @post
     end
+
   end
 
   def destroy
