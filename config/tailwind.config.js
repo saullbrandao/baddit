@@ -11,6 +11,17 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      keyframes: {
+        abc: {
+          '0%': { opacity: 0 },
+          '5%': { opacity: 1 },
+          '60%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
+      },
+      animation: {
+        abc: 'abc 4s ease-in-out',
+      },
     },
   },
   plugins: [

@@ -1,3 +1,8 @@
 <% flash.each do |message_type, message| %>
-	<%= content_tag(:div, message, class: flash_class(message_type.to_sym)) %>
+	<div data-controller="flash" data-action="animationend->flash#dismiss" class="<%= flash_class(message_type.to_sym)%>" >
+		<%= message %>
+		<button type="button" class="flex justify-center items-center rounded w-6 h-6 hover:bg-gray-400">
+			<%= inline_svg_tag 'close.svg', class: "w-5 h-5 hover:stroke-red-600"  %>
+		</button>
+	</div>
 <% end %>
