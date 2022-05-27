@@ -12,7 +12,7 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
-        abc: {
+        fade: {
           '0%': { opacity: 0 },
           '5%': { opacity: 1 },
           '60%': { opacity: 1 },
@@ -20,7 +20,7 @@ module.exports = {
         },
       },
       animation: {
-        abc: 'abc 4s ease-in-out',
+        fade: 'fade 4s ease-in-out',
       },
     },
   },
