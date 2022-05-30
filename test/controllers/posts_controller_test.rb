@@ -54,6 +54,18 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_path
   end
 
+  test "should not create post if not joined the community" do
+    sign_in users(:two)
+
+    assert_difference "Post.count", 0 do
+      post posts_path, params: { post: { title: "Test Post",
+                                         body: "Test Body",
+                                         community: communities(:one).slug } }
+    end
+
+    assert_redirected_to root_path
+  end
+
   test "should destroy post only if has ownership" do
     sign_in users(:two)
     assert_difference "Post.count", 0 do
