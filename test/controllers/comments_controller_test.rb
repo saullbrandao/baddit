@@ -1,8 +1,6 @@
 require "test_helper"
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
-
   def setup
     @comment = comments(:one)
   end

@@ -1,8 +1,6 @@
 require "test_helper"
 
 class CommunitiesControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
-
   def setup
     @community = communities(:one)
   end
