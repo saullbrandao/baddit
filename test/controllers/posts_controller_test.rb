@@ -23,6 +23,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get new_post_path
     assert_response :redirect
     assert_redirected_to new_user_session_path
+    assert_equal "You need to sign in or sign up before continuing.", flash[:alert]
     
     sign_in users(:one)
     get new_post_path
@@ -40,6 +41,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to community_post_path(@community.slug, Post.last.slug)
+    assert_equal "Post created successfully!", flash[:success]
   end
   
   test "should not create post if not logged in" do
@@ -50,6 +52,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to new_user_session_path
+    assert_equal "You need to sign in or sign up before continuing.", flash[:alert]
   end
 
   test "should not create post if not joined the community" do
@@ -62,6 +65,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to root_path
+    assert_equal "You need to join the community before creating a post!", flash[:error]
   end
 
   test "should get edit only if owns the post" do
@@ -83,6 +87,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     patch post_path(@post), params: { post: { title: "Test Post",
                                               body: "Test Body" }}
     assert_redirected_to community_post_path(@community.slug, @post.slug)
+    assert_equal "Post updated successfully!", flash[:success]
     assert_equal "Test Post", @post.reload.title
     assert_equal "Test Body", @post.reload.body
   end
@@ -92,6 +97,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
                                               body: "Test Body" }}
     assert_response :redirect
     assert_redirected_to new_user_session_path
+    assert_equal "You need to sign in or sign up before continuing.", flash[:alert]
   end
 
   test "should destroy post only if has ownership" do
@@ -100,10 +106,15 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       delete post_path(@post)
     end
 
+    assert_redirected_to root_path
+    assert_equal "You are not allowed to do this action!", flash[:error]
+
     sign_in users(:one)
     assert_difference "Post.count", -1 do
       delete post_path(@post)
     end
+    assert_redirected_to root_path
+    assert_equal "Post deleted successfully!", flash[:success]
   end
 
   test "should upvote post" do
@@ -126,6 +137,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "Post.find(#{@post.id}).votes.count", 0 do
       patch post_upvote_path(@post.id)
     end
+    assert_redirected_to new_user_session_path
+    assert_equal "You need to sign in or sign up before continuing.", flash[:alert]
 
     assert_difference "Post.find(#{@post.id}).votes.count", 0 do
       patch post_downvote_path(@post.id)

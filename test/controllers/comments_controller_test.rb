@@ -14,6 +14,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to community_post_path(@post.community.slug, @post.slug)
+    assert_equal "Comment created successfully!", flash[:success]
   end
 
   test "should not create comment if not logged in" do
@@ -24,6 +25,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to new_user_session_path
+    assert_equal "You need to sign in or sign up before continuing.", flash[:alert]
   end
 
   test "should delete comment only if has ownership" do
@@ -40,6 +42,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to posts_path(slug: @comment.post.slug)
+    assert_equal "Comment deleted successfully!", flash[:success]
   end
 
   test "should upvote comment" do

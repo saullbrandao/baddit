@@ -29,7 +29,7 @@ class PostsController < ApplicationController
       end
 
     else
-      flash[:error] = "You are not allowed to post in this community!"
+      flash[:error] = "You need to join the community before creating a post!"
       redirect_to :root
     end
   end

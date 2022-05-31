@@ -14,7 +14,7 @@ class CommunitiesController < ApplicationController
     @community = Community.new(name: community_params[:name], owner: current_user)
 
     if @community.save
-      flash[:success] = "Community created!"
+      flash[:success] = "Community created successfully!"
       redirect_to community_path(@community.slug)
     else
       render :new, status: :unprocessable_entity
@@ -25,7 +25,7 @@ class CommunitiesController < ApplicationController
     @community = Community.find_by(slug: params[:slug])
     @community.destroy
 
-    flash[:success] = "Community deleted!"
+    flash[:success] = "Community deleted successfully!"
     redirect_to :root
   end
 
@@ -33,7 +33,7 @@ class CommunitiesController < ApplicationController
     @community = Community.find_by(slug: params[:community_slug])
     current_user.join(@community)
 
-    flash[:success] = "Joined community!"
+    flash[:success] = "You have joined the community!"
     redirect_to community_path(@community.slug)
   end
 
@@ -41,7 +41,7 @@ class CommunitiesController < ApplicationController
     @community = Community.find_by(slug: params[:community_slug])
     current_user.leave(@community)
 
-    flash[:success] = "Left community!"
+    flash[:success] = "You have left the community!"
     redirect_to community_path(@community.slug)
   end
 
