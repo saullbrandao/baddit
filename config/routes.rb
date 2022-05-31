@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   root 'posts#index'
 
-  resources :posts, only: [:new, :create, :destroy] do
+  resources :posts, only: [:new, :create, :update, :edit, :destroy] do
     patch 'upvote'
     patch 'downvote'
     resources :comments, only: [:create]

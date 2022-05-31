@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all.order(total_votes: :desc)
@@ -31,6 +31,21 @@ class PostsController < ApplicationController
     else
       flash[:error] = "You are not allowed to post in this community!"
       redirect_to :root
+    end
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+
+    if @post.update(title: post_params[:title], body: post_params[:body])
+      flash[:success] = "Post updated successfully!"
+      redirect_to community_post_path(@post.community.slug, @post.slug)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -72,7 +87,11 @@ class PostsController < ApplicationController
 
   def correct_user
     @user = Post.find(params[:id]).user
-    redirect_to :root unless @user == current_user
+
+    unless @user == current_user
+      flash[:error] = "You are not allowed to do this action!"
+      redirect_to :root 
+    end
   end
 
   def can_post?

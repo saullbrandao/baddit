@@ -1,27 +1,8 @@
-<div class="flex justify-center">
-	<% if available_communities.any? %>
-		<%= form_with model: @post, 
-                class: "flex flex-col justify-center gap-2 bg-white px-8 py-6 mt-10 rounded-md w-full md:w-2/3 xl:w-1/3" do |f| %>
-			<h1 class="font-bold self-center text-lg" >New Post</h1>
-
-			<%= render 'shared/error_messages', object: @post %>
-
-			<%= f.label :title %>
-			<%= f.text_field :title, label: :title, minlength: 3, maxlength: 50, required: true, class: "w-full"  %>
-
-			<%= f.label :body %>
-			<%= f.text_area :body, rows: 10, minlength: 3, maxlength: 500, required: true, class: "w-full"  %>
-
-			<%= f.label :community %>
-			<%= f.select :community, available_communities  %>
-
-			<%= f.button class: "bg-blue-600 text-white py-2 mt-2 hover:brightness-110"  %>
-		<% end %>
-
-	<% else %>
-		<div class="flex flex-col justify-center gap-2 bg-white px-8 py-6 rounded-md w-full md:w-2/3 xl:w-1/3">
-			<h1 class="font-bold self-center text-lg" >New Post</h1>
-			<p class="text-center">You need to create or join a community first.</p>
-		</div>
-	<% end %>
-</div>
+<% if available_communities.any? %>
+	<%= render 'form', title: "New Post" %>
+<% else %>
+	<div class="flex flex-col justify-center gap-2 bg-white px-8 py-6 rounded-md w-full md:w-2/3 xl:w-1/3">
+		<h1 class="font-bold self-center text-lg" >New Post</h1>
+		<p class="text-center">You need to create or join a community first.</p>
+	</div>
+<% end %>

@@ -1,0 +1,5 @@
+<% if current_user == post.user %>
+	<%= link_to edit_post_path(post), class: "flex justify-center items-center w-6 h-6 stroke-gray-400 hover:bg-yellow-100 hover:stroke-yellow-800" do %>
+		<%= inline_svg_tag 'edit.svg', class: "w-4 h-4 " %>
+	<% end %>
+<% end %>

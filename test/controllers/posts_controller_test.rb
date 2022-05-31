@@ -64,6 +64,36 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
+  test "should get edit only if owns the post" do
+    sign_in users(:two)
+    get edit_post_path(@post)
+    assert_response :redirect
+    assert_equal "You are not allowed to do this action!", flash[:error]
+    assert_redirected_to :root
+
+    sign_in users(:one)
+    get edit_post_path(@post)
+    assert_select "h1", "Edit Post"
+    assert_select "button", "Update Post"
+  end
+
+  test "should update post" do
+    sign_in users(:one)
+
+    patch post_path(@post), params: { post: { title: "Test Post",
+                                              body: "Test Body" }}
+    assert_redirected_to community_post_path(@community.slug, @post.slug)
+    assert_equal "Test Post", @post.reload.title
+    assert_equal "Test Body", @post.reload.body
+  end
+
+  test "should not update post if not logged in" do
+    patch post_path(@post), params: { post: { title: "Test Post",
+                                              body: "Test Body" }}
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
+  end
+
   test "should destroy post only if has ownership" do
     sign_in users(:two)
     assert_difference "Post.count", 0 do
