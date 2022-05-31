@@ -9,6 +9,7 @@ class CommunitiesControllerTest < ActionDispatch::IntegrationTest
     get community_path(@community.slug)
     assert_response :success
     assert_select "h1", @community.name
+    assert_select "span", "#{@community.users.count + 1} members"
   end
   
   test "should get new only if logged in" do

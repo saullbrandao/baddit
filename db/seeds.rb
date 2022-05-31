@@ -22,10 +22,12 @@ communities = Community.all
 
 communities.each do |community|
   3.times do |i|
+    user = users.sample
+    user.join(community)
     post = community.posts
                     .create!(title: Faker::Lorem.sentence,
                              body: Faker::Lorem.paragraph_by_chars(number: 500), 
-                             user: users.sample, 
+                             user: user, 
                              created_at: Faker::Time.between(from: 3.month.ago, to: Time.now))
     
     rand(0..20).times do |i|
