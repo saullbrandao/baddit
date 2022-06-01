@@ -1,5 +1,5 @@
 <h1 class="text-sm font-semibold mb-2 ">Posts</h1>
-<ul class="flex flex-col divide-y-2 divide-[#dae0e6] mb-2">
+<ul class="flex flex-col divide-y-2 divide-light-divide dark:divide-dark-divide mb-2">
 	<% @posts.each do |post| %>
 		<%= render 'post', post: post %>
 	<% end %>

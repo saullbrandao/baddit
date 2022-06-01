@@ -1,12 +1,12 @@
 <%= render 'communities/header' %>
-<section class="w-full flex gap-2 bg-white p-2 mt-8 rounded-md">
+<section class="w-full flex gap-2 bg-light-bg-alt dark:bg-dark-bg-alt p-2 mt-8 rounded-md">
 	<%= render 'shared/vote', 
              votable: @post, 
              upvote_path: post_upvote_path(@post.id),
              downvote_path: post_downvote_path(@post.id) %>
 	<article class="flex flex-col flex-1 justify-center gap-1">
 		<div class="flex gap-2 items-center">
-			<span class="text-gray-500 text-sm">Posted by u/<%="#{@post.user.username} #{time_ago_in_words(@post.created_at)}" %> ago</span>
+			<span class="text-gray-500 dark:text-300 text-sm">Posted by u/<%="#{@post.user.username} #{time_ago_in_words(@post.created_at)}" %> ago</span>
 			<%= render 'posts/edit_link', post: @post  %>
 			<%= render 'shared/delete', deletable: @post, deletable_path: post_path(@post)  %>
 		</div>

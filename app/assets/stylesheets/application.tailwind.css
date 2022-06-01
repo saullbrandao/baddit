@@ -4,6 +4,6 @@
 
 @layer base {
   .anchor-styling {
-    @apply hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+    @apply text-[#222222] hover:text-red-800 hover:visited:text-red-800 visited:text-[#9b9b9b] dark:text-[#D7DADC] dark:visited:text-[#6f7071];
   }
 }

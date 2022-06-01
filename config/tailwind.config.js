@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  darkMode: "media",
   content: [
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
@@ -22,6 +23,18 @@ module.exports = {
       animation: {
         fade: 'fade 4s ease-in-out',
       },
+      colors: {
+        light: {
+          bg: '#dae0e6',
+          'bg-alt': '#ffffff',
+          divide: '#dae0e6',
+        },
+        dark: {
+          bg: '#030303',
+          'bg-alt': '#1a1a1b',
+          divide: '#343536',
+        }
+      }
     },
   },
   plugins: [

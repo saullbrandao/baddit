@@ -1,4 +1,4 @@
-<li class="flex bg-white p-2 gap-2">
+<li class="flex bg-light-bg-alt dark:bg-dark-bg-alt p-2 gap-2">
 	<%= render 'shared/vote', 
              votable: post, 
              upvote_path: post_upvote_path(post.id),
@@ -17,7 +17,7 @@
 			<% unless current_page?(community_path(post.community.slug)) %>
 				<%= link_to "b/#{post.community.slug}", community_path(post.community.slug), class: "font-bold hover:text-red-600" %>
 			<% end %>
-			<span class="text-gray-500">Posted by u/<%="#{post.user.username} #{time_ago_in_words(post.created_at)}" %> ago</span>
+			<span class="text-gray-500 dark:text-gray-300">Posted by u/<%="#{post.user.username} #{time_ago_in_words(post.created_at)}" %> ago</span>
 
 		</div>
 		<%= link_to pluralize(post.comments.size, "comment"), community_post_url(post.community.slug, post.slug), class: "text-sm anchor-styling" %>

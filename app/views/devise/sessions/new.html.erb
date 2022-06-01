@@ -1,21 +1,21 @@
 <div class="flex justify-center">
 
-	<%= form_for resource, as: resource_name, url: new_session_path(resource_name), html: {class: "flex flex-col justify-center gap-2 bg-white px-8 py-6 mt-10 rounded-md w-full md:w-1/3 xl:w-1/4"} do |f| %>
+	<%= form_for resource, as: resource_name, url: new_session_path(resource_name), html: {class: "flex flex-col justify-center gap-2 bg-light-bg-alt dark:bg-dark-bg-alt px-8 py-6 mt-10 rounded-md w-full md:w-1/3 xl:w-1/4"} do |f| %>
 		<h2 class="font-bold self-center text-lg">Log in</h2>
 		<%= render "devise/shared/error_messages", resource: resource %>
 
 		<div class="field">
 			<%= f.label :email %><br />
-			<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full" %>
+			<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full bg-transparent" %>
 		</div>
 
 		<div class="field">
 			<%= f.label :password %><br />
-			<%= f.password_field :password, autocomplete: "current-password", class: "w-full" %>
+			<%= f.password_field :password, autocomplete: "current-password", class: "w-full bg-transparent" %>
 		</div>
 
 		<% if devise_mapping.rememberable? %>
-			<div class="field">
+			<div class="field flex items-center gap-2">
 				<%= f.check_box :remember_me %>
 				<%= f.label :remember_me %>
 			</div>
