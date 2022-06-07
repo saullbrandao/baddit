@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
-  resources :comments, only: [:destroy] do
+  resources :comments, only: [:edit, :update, :destroy] do
     patch 'upvote'
     patch 'downvote'
   end
