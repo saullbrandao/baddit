@@ -7,8 +7,14 @@
 	<article class="flex flex-col flex-1 justify-center gap-1">
 		<div class="flex gap-2 items-center">
 			<span class="text-gray-500 dark:text-300 text-sm">Posted by u/<%="#{@post.user.username} #{time_ago_in_words(@post.created_at)}" %> ago</span>
-			<%= render 'shared/edit', editable: @post, editable_path: edit_post_path(@post) %>
-			<%= render 'shared/delete', deletable: @post, deletable_path: post_path(@post)  %>
+			<%= render 'shared/edit', 
+                  editable: @post, 
+                  editable_path: edit_post_path(@post),
+                  label: "Edit Post" %>
+			<%= render 'shared/delete', 
+                  deletable: @post, 
+                  deletable_path: post_path(@post),
+                  label: "Destroy Post" %>
 		</div>
 		<h1 class="font-bold text-xl">
 			<%= @post.title %>

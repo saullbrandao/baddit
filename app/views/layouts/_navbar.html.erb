@@ -4,12 +4,9 @@
 			<%= link_to 'Baddit', '/', class: "font-semibold hover:text-red-600" %>
 
 			<div class="relative inline-block text-left" data-controller="dropdown">
-				<div>
-					<button type="button" data-action="click->dropdown#toggleMenu" class="inline-flex justify-center w-full rounded px-4 py-2 hover:bg-gray-200 dark:fill-white dark:hover:fill-black">
-						<%= inline_svg_tag 'plus.svg', class: "w-3 h-3 " %>
-					</button>
-				</div>
-
+				<button type="button" data-action="click->dropdown#toggleMenu" aria-label="Dropdown" class="inline-flex justify-center w-full rounded px-4 py-2 hover:bg-gray-200 dark:fill-white dark:hover:fill-black">
+					<%= inline_svg_tag 'plus.svg', class: "w-3 h-3 " %>
+				</button>
 				<div class="hidden absolute left-0 mt-2 rounded shadow-lg bg-light-bg-alt dark:bg-dark-bg-alt" tabindex="-1" data-dropdown-target="menu">
 					<div class="flex flex-col gap-1 p-1 text-sm w-36" role="none">
 						<%= link_to "New Post", new_post_path, class: "hover:bg-gray-200 dark:hover:bg-gray-500 px-1" %>

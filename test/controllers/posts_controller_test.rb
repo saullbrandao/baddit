@@ -37,7 +37,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "Post.count", 1 do
       post posts_path, params: { post: { title: "Test Post",
                                          body: "Test Body",
-                                         community: communities(:one).slug } }
+                                         community: communities(:one).name } }
     end
 
     assert_redirected_to community_post_path(@community.slug, Post.last.slug)
@@ -48,7 +48,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "Post.count", 0 do
       post posts_path, params: { post: { title: "Test Post",
                                          body: "Test Body",
-                                         community: communities(:one).slug } }
+                                         community: communities(:one).name } }
     end
 
     assert_redirected_to new_user_session_path
@@ -61,7 +61,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "Post.count", 0 do
       post posts_path, params: { post: { title: "Test Post",
                                          body: "Test Body",
-                                         community: communities(:one).slug } }
+                                         community: communities(:one).name } }
     end
 
     assert_redirected_to root_path

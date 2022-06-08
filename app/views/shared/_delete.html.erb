@@ -2,6 +2,7 @@
 	<%= button_to deletable_path, 
                       method: :delete, 
                       form: { data: {turbo_confirm: "Are you sure?"}},
+                      'aria-label': label,
                       class: "flex justify-center items-center w-6 h-6 stroke-gray-400 hover:bg-red-100 hover:stroke-red-800" do %>
 		<%= inline_svg_tag 'trash.svg', class: "w-4 h-4 " %>
 	<% end %>

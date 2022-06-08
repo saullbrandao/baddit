@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   
       if @post.save
         flash[:success] = "Post created successfully!"
-        redirect_to community_post_path(@community.slug, @post.slug)
+        redirect_to community_post_path(current_community.slug, @post.slug)
       else
         render :new, status: :unprocessable_entity
       end
@@ -82,7 +82,7 @@ class PostsController < ApplicationController
   end
 
   def current_community
-    @community = Community.find_by(slug: post_params[:community])
+    community = Community.find_by(name: post_params[:community])
   end
 
   def correct_user
@@ -95,6 +95,6 @@ class PostsController < ApplicationController
   end
 
   def can_post?
-    current_community.users.include?(current_user) || current_user.owns?(current_community)
+    current_user.owns?(current_community) || current_community.users.include?(current_user)
   end
 end

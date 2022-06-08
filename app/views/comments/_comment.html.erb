@@ -10,10 +10,12 @@
 			</span>
 			<%= render 'shared/edit', 
                   editable: comment,
-                  editable_path: edit_comment_path(comment) %>
+                  editable_path: edit_comment_path(comment),
+                  label: "Edit Comment" %>
 			<%= render 'shared/delete',
                  deletable: comment, 
-                 deletable_path: comment_path(comment)  %>
+                 deletable_path: comment_path(comment),
+                 label: "Destroy Comment" %>
 		</div>
 		<p class="break-all">
 			<%= comment.body %>

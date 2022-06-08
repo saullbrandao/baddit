@@ -9,8 +9,14 @@
 			<h2 class="font-semibold">
 				<%= link_to post.title, community_post_url(post.community.slug, post.slug), class: "anchor-styling" %>
 			</h2>
-			<%= render 'shared/edit', editable: post, editable_path: edit_post_path(post) %>
-			<%= render 'shared/delete', deletable: post, deletable_path: post_path(post) %>
+			<%= render 'shared/edit', 
+                  editable: post, 
+                  editable_path: edit_post_path(post),
+                  label: "Edit Post" %>
+			<%= render 'shared/delete', 
+                  deletable: post, 
+                  deletable_path: post_path(post),
+                  label: "Destroy Post" %>
 
 		</div>
 		<div class="text-xs">
