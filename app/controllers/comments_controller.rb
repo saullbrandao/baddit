@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     flash[:success] = "Comment deleted successfully!"
-    redirect_to posts_path(slug: @comment.post.slug)
+    redirect_to community_post_path(@comment.post.community.slug, @comment.post.slug)
   end
 
   def upvote 

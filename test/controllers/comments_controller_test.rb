@@ -41,7 +41,8 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
       delete comment_path(@comment)
     end
 
-    assert_redirected_to posts_path(slug: @comment.post.slug)
+    assert_redirected_to community_post_path(@comment.post.community.slug, @comment.post.slug)
+
     assert_equal "Comment deleted successfully!", flash[:success]
   end
 

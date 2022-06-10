@@ -1,6 +1,7 @@
 <li class="flex w-full bg-light-bg-alt dark:bg-dark-bg-alt p-2 gap-2">
 	<%= render 'shared/vote',
-             votable: comment, 
+             votable: comment,
+             votable_type: 'Comment',
              upvote_path: comment_upvote_path(comment),
              downvote_path: comment_downvote_path(comment)%>
 	<article class=" flex flex-col justify-center gap-2  rounded-md">

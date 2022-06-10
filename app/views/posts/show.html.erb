@@ -1,7 +1,8 @@
 <%= render 'communities/header' %>
 <section class="w-full flex gap-2 bg-light-bg-alt dark:bg-dark-bg-alt p-2 mt-8 rounded-md">
 	<%= render 'shared/vote', 
-             votable: @post, 
+             votable: @post,
+             votable_type: 'Post',
              upvote_path: post_upvote_path(@post.id),
              downvote_path: post_downvote_path(@post.id) %>
 	<article class="flex flex-col flex-1 justify-center gap-1">

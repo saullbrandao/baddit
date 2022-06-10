@@ -1,14 +1,16 @@
 <div class="flex flex-col items-center w-6">
 	<%= button_to sanitize("&#8593"), 
                   upvote_path, 
-                  method: :patch, 
+                  method: :patch,
+                  'aria-label': "Upvote #{votable_type}",
                   class: vote_button_class(votable, 1) %>
 
-	<span class="text-xs font-bold">
+	<span aria-label=<%= "#{votable_type} Karma" %> class="text-xs font-bold">
 		<%= votable.total_votes == 0 ? "Vote" : votable.karma %>
 	</span>
 	<%= button_to sanitize("&#8595"), 
                   downvote_path, 
-                  method: :patch, 
+                  method: :patch,
+                  'aria-label': "Downvote #{votable_type}",
                   class: vote_button_class(votable, -1) %>
 </div>

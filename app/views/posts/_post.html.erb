@@ -1,6 +1,7 @@
 <li class="flex bg-light-bg-alt dark:bg-dark-bg-alt p-2 gap-2">
 	<%= render 'shared/vote', 
-             votable: post, 
+             votable: post,
+             votable_type: 'Post',
              upvote_path: post_upvote_path(post.id),
              downvote_path: post_downvote_path(post.id) %>
 
