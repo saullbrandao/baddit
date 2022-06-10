@@ -30,6 +30,22 @@ class PostsTest < ApplicationSystemTestCase
     assert_text "Post updated successfully!"
   end
   
+  test "upvote a Post" do
+    visit community_post_url(@post.community.slug, @post.slug)
+
+    assert_text "Vote"
+    click_on "Upvote Post"
+    assert_text "1"
+  end
+
+  test "downvote a Post" do
+    visit community_post_url(@post.community.slug, @post.slug)
+
+    assert_text "Vote"
+    click_on "Downvote Post"
+    assert_text "-1"
+  end
+
   test "destroying a Post" do
     visit community_post_path(@post.community.slug, @post.slug)
     page.accept_confirm do
