@@ -1,4 +1,13 @@
 module ApplicationHelper
+  def page_title(title = '')
+    base_title = "Baddit"
+    if title.empty?
+      base_title
+    else
+      "#{title} | #{base_title}"
+    end
+  end
+
   def vote_button_class(votable, vote)
     base_class = "hover:bg-gray-200 rounded dark:hover:text-black"
     if current_user && current_user.voted_with?(votable, vote)
