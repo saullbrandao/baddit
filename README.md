@@ -76,6 +76,9 @@ $ git clone https://github.com/saullbrandao/baddit.git && cd baddit
 # Install Gems
 $ bundle install
 
+# Run migrations
+$ bin/rails db:migrate
+
 # Run Application
 $ bin/dev
 ```
