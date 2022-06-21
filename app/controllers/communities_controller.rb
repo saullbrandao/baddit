@@ -1,9 +1,19 @@
 class CommunitiesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :paginate]
   before_action :correct_user, only: [:destroy]
 
   def show
     @community = Community.find_by(slug: params[:slug])
+    @pagy, @posts = pagy(@community.posts.order(created_at: :desc), items: 10)
+  end
+  
+  def paginate
+    @community = Community.find_by(slug: params[:community_slug])
+    @pagy, @posts = pagy(@community.posts.order(created_at: :desc), items: 10)
+
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def new

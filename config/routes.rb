@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   root "posts#index"
 
-  resources :posts, only: [:new, :create, :update, :edit, :destroy] do
+  resources :posts, except: [:index, :show] do
     collection do
       post :paginate
     end
@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     patch 'downvote'
   end
 
-  resources :communities, param: :slug, path: 'b' do
+  resources :communities, param: :slug, path: 'b', except: [:index] do
+    post :paginate
     post 'join'
     delete 'leave'
     resources :posts, param: :slug, only: [:show]

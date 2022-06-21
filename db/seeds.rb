@@ -21,7 +21,7 @@ end
 communities = Community.all
 
 communities.each do |community|
-  10.times do |i|
+  rand(10..30).times do |i|
     user = users.sample
     user.join(community)
     post = community.posts
@@ -30,7 +30,7 @@ communities.each do |community|
                              user: user, 
                              created_at: Faker::Time.between(from: 3.month.ago, to: Time.now))
     
-    rand(0..20).times do |i|
+    rand(0..30).times do |i|
       post.comments.create!(body: Faker::Lorem.sentence, user: users.sample, created_at: Faker::Time.between(from: post.created_at, to: Time.now))
       post.votes.create!(user: users[i], vote: [1, -1].sample)
     end
