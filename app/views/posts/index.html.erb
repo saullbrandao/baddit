@@ -1,6 +1,7 @@
 <h1 class="text-sm font-semibold mb-2 ">Posts</h1>
-<ul class="flex flex-col divide-y-2 divide-light-divide dark:divide-dark-divide mb-2">
-	<% @posts.each do |post| %>
-		<%= render 'post', post: post %>
-	<% end %>
+<ul id="posts" class="flex flex-col divide-y-2 divide-light-divide dark:divide-dark-divide mb-2">
+	<%= render @posts%>
 </ul>
+<div id="next_link" class="my-4 ">
+	<%= render 'shared/load_button', url: paginate_posts_path + pagy_url_for(@pagy, @pagy.next) %>
+</div>

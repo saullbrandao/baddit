@@ -1,0 +1,9 @@
+<%= turbo_stream.append "posts" do %>
+	<%= render @posts %>
+<% end %>
+
+<%= turbo_stream.update "next_link" do %>
+	<% if @pagy.next.present? %>
+		<%= render 'shared/load_button', url: pagy_url_for(@pagy, @pagy.next) %>
+	<% end %>
+<% end %>

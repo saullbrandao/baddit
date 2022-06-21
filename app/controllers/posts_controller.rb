@@ -1,9 +1,17 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :paginate]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order(total_votes: :desc)
+    @pagy, @posts = pagy(Post.order(created_at: :desc), items: 10)
+  end
+
+  def paginate
+    @pagy, @posts = pagy(Post.order(created_at: :desc), items: 10)
+
+    respond_to do |format|
+      format.turbo_stream # POST
+    end
   end
 
   def show

@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+  
   def page_title(title = '')
     base_title = "Baddit"
     if title.empty?

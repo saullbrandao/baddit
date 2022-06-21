@@ -4,7 +4,7 @@ require 'faker'
 30.times do |i|
   User.create!(
     email: Faker::Internet.email,
-    username: Faker::Internet.username,
+    username: Faker::Internet.username(specifier: 3..20),
     password: 'password',
     password_confirmation: 'password'
   )
@@ -21,7 +21,7 @@ end
 communities = Community.all
 
 communities.each do |community|
-  3.times do |i|
+  10.times do |i|
     user = users.sample
     user.join(community)
     post = community.posts
