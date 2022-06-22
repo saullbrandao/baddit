@@ -1,7 +1,7 @@
 require 'faker'
 
 # Create users
-30.times do |i|
+10.times do |i|
   User.create!(
     email: Faker::Internet.email,
     username: Faker::Internet.username(specifier: 3..20),
@@ -21,7 +21,7 @@ end
 communities = Community.all
 
 communities.each do |community|
-  rand(10..30).times do |i|
+  rand(10..20).times do |i|
     user = users.sample
     user.join(community)
     post = community.posts
@@ -30,7 +30,7 @@ communities.each do |community|
                              user: user, 
                              created_at: Faker::Time.between(from: 3.month.ago, to: Time.now))
     
-    rand(0..30).times do |i|
+    rand(0..10).times do |i|
       post.comments.create!(body: Faker::Lorem.sentence, user: users.sample, created_at: Faker::Time.between(from: post.created_at, to: Time.now))
       post.votes.create!(user: users[i], vote: [1, -1].sample)
     end
@@ -38,7 +38,7 @@ communities.each do |community|
 end
 
 Comment.all.each do |comment|
-  rand(0..20).times do |i|
+  rand(0..10).times do |i|
     comment.votes.create!(user: users[i], vote: [1, -1].sample)
   end
 end
