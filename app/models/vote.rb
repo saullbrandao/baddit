@@ -6,11 +6,11 @@ class Vote < ApplicationRecord
   belongs_to :user
   belongs_to :votable, polymorphic: true
 
-  validates :user_id, uniqueness: { scope: [:votable_id, :votable_type] }
+  validates :user_id, uniqueness: { scope: %i[votable_id votable_type] }
   validates :vote, inclusion: { in: [-1, 1] }
 
   def self.upvote(user, votable)
-    vote = Vote.find_or_initialize_by(user: user, votable: votable)
+    vote = Vote.find_or_initialize_by(user:, votable:)
 
     if vote.vote == 1
       vote.destroy
@@ -21,7 +21,7 @@ class Vote < ApplicationRecord
   end
 
   def self.downvote(user, votable)
-    vote = Vote.find_or_initialize_by(user: user, votable: votable)
+    vote = Vote.find_or_initialize_by(user:, votable:)
 
     if vote.vote == -1
       vote.destroy
@@ -34,12 +34,12 @@ class Vote < ApplicationRecord
   private
 
   def update_total_votes
-    self.votable.total_votes = self.votable.votes.count
-    self.votable.save
+    votable.total_votes = votable.votes.count
+    votable.save
   end
-  
+
   def update_karma
-    self.votable.karma = self.votable.votes.sum(:vote)
-    self.votable.save
+    votable.karma = votable.votes.sum(:vote)
+    votable.save
   end
 end

@@ -1,8 +1,8 @@
 module ApplicationHelper
   include Pagy::Frontend
-  
+
   def page_title(title = '')
-    base_title = "Baddit"
+    base_title = 'Baddit'
     if title.empty?
       base_title
     else
@@ -11,8 +11,8 @@ module ApplicationHelper
   end
 
   def vote_button_class(votable, vote)
-    base_class = "hover:bg-gray-200 rounded dark:hover:text-black"
-    if current_user && current_user.voted_with?(votable, vote)
+    base_class = 'hover:bg-gray-200 rounded dark:hover:text-black'
+    if current_user&.voted_with?(votable, vote)
       "text-red-600 #{base_class}"
     else
       base_class
@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def flash_class(level)
-    base_class = "flex gap-2 animate-fade rounded-md border-1 border-gray-800 p-2 max-w-fit mx-auto z-50 absolute left-0 right-0 top-6 "
+    base_class = 'flex gap-2 animate-fade rounded-md border-1 border-gray-800 p-2 max-w-fit mx-auto z-50 absolute left-0 right-0 top-6 '
     case level
     when :notice then "bg-blue-100 text-blue-800 #{base_class}"
     when :success then "bg-green-100 text-green-800 #{base_class}"

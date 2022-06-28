@@ -14,9 +14,9 @@ class Post < ApplicationRecord
   def ordered_comments
     comments.order(karma: :desc)
   end
-  
+
   private
-  
+
   def add_slug
     self.slug = title.parameterize.underscore
   end
